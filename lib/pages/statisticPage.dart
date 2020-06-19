@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,8 @@ import 'package:inafews_app/core/base_api.dart' as RestAPI;
 
 import 'dart:convert';
 import 'dart:async';
+
+FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 Future<Banjir> fetchBanjir() async{
   final response = await http.get(RestAPI.BASE_URL + "/last");
@@ -127,6 +130,27 @@ class _StatisticPageState extends State<StatisticPage> {
   void initState(){
     super.initState();
     futureBanjir = fetchBanjir();
+    setupNotification();
+  }
+
+  void setupNotification() async {
+    _firebaseMessaging.getToken().then((token){
+      print(token);
+    });
+
+    _firebaseMessaging.subscribeToTopic("peringatan");
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("message: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("message: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("message: $message");
+      },
+    );
   }
 
   @override
@@ -157,32 +181,14 @@ class _StatisticPageState extends State<StatisticPage> {
               setState(() {});
               _refreshController.refreshCompleted();
             },
-            child: FutureBuilder<Banjir>(
+            child: new FutureBuilder<Banjir>(
               future: futureBanjir,
-              builder: (context, snapshot){
-                if(snapshot.hasData == null){
-                  return _buildMain(
-                    "N/A",
-                    "N/A",
-                    "N/A", 
-                    "N/A", 
-                    AppColors.offColor, 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A", 
-                    "N/A"
-                  );
-                } else if(snapshot.hasError){
+              builder: (BuildContext context, AsyncSnapshot snapshot){
+                if(snapshot.hasError){
                   return Center(
                     child: Text("Error : ${snapshot.error}"),
                   );
-                } else{
+                } else if (snapshot.hasData){
                   if(snapshot.data.siteStatus != "Active"){
                     return _buildMain(
                       "Situ Gintung",
@@ -278,7 +284,7 @@ class _StatisticPageState extends State<StatisticPage> {
                   }
                 }
                 return SpinKitDoubleBounce(
-                  color: Colors.white,
+                  color: Colors.blue,
                 );
               },
             ),

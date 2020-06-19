@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1074614862415",
+    "firebase_url": "https://ina-fews.firebaseio.com",
+    "project_id": "ina-fews",
+    "storage_bucket": "ina-fews.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074614862415:android:ef1702b35e75bfc609a03a",
+        "android_client_info": {
+          "package_name": "com.example.inafews_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074614862415-dl5i786anv9gje0ffvptkr7bete189p2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDMVoyMbomopXROdxus6E1G-yAT7U8p7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074614862415-dl5i786anv9gje0ffvptkr7bete189p2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
