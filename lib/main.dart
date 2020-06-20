@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
        fontFamily: "Ubuntu"
       ),
-      initialRoute: '/statistic',
+      initialRoute: '/splash',
       routes: {
         '/statistic'  : (context) => StatisticPage(),
         '/splash'     : (context) => SplashScreen(),

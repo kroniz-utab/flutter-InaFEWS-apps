@@ -191,12 +191,12 @@ class _StatisticPageState extends State<StatisticPage> {
                 } else if (snapshot.hasData){
                   if(snapshot.data.siteStatus != "Active"){
                     return _buildMain(
-                      "Situ Gintung",
-                      "Ciputat, Tangerang Selatan",
+                      "Katulampa",
+                      "Sidangrasa, Bogor",
                       snapshot.data.data.tanggal.toString(), 
                       snapshot.data.data.jam, 
                       AppColors.offColor, 
-                      snapshot.data.data.ketinggian, 
+                      snapshot.data.data.ketinggian,
                       "SITE MATI", 
                       "24", 
                       "5", 
@@ -210,13 +210,13 @@ class _StatisticPageState extends State<StatisticPage> {
                   } else {
                     if(snapshot.data.data.status == "1"){
                       return _buildMain(
-                        "Situ Gintung",
-                        "Ciputat, Tangerang Selatan",
+                        "Katulampa",
+                        "Sidangrasa, Bogor",
                         snapshot.data.data.tanggal.toString(), 
                         snapshot.data.data.jam, 
                         AppColors.meluapAlert, 
                         snapshot.data.data.ketinggian, 
-                        "MELUAP", 
+                        "SIAGA I", 
                         "24", 
                         "5", 
                         "2", 
@@ -228,13 +228,13 @@ class _StatisticPageState extends State<StatisticPage> {
                       );
                     } else if(snapshot.data.data.status == "2"){
                       return _buildMain(
-                        "Situ Gintung",
-                        "Ciputat, Tangerang Selatan",
+                        "Katulampa",
+                        "Sidangrasa, Bogor",
                         snapshot.data.data.tanggal.toString(), 
                         snapshot.data.data.jam, 
                         AppColors.awasAlert, 
                         snapshot.data.data.ketinggian, 
-                        "AWAS", 
+                        "SIAGA II", 
                         "24", 
                         "5", 
                         "2", 
@@ -246,13 +246,13 @@ class _StatisticPageState extends State<StatisticPage> {
                       );
                     } else if(snapshot.data.data.status == "3"){
                       return _buildMain(
-                        "Situ Gintung",
-                        "Ciputat, Tangerang Selatan",
+                        "Katulampa",
+                        "Sidangrasa, Bogor",
                         snapshot.data.data.tanggal.toString(), 
                         snapshot.data.data.jam, 
                         AppColors.waspadaAlert, 
                         snapshot.data.data.ketinggian, 
-                        "WASPADA", 
+                        "SIAGA III", 
                         "24", 
                         "5", 
                         "2", 
@@ -264,8 +264,26 @@ class _StatisticPageState extends State<StatisticPage> {
                       );
                     } else if(snapshot.data.data.status == "4"){
                       return _buildMain(
-                        "Situ Gintung",
-                        "Ciputat, Tangerang Selatan",
+                        "Katulampa",
+                        "Sidangrasa, Bogor",
+                        snapshot.data.data.tanggal.toString(), 
+                        snapshot.data.data.jam, 
+                        AppColors.amanColor, 
+                        snapshot.data.data.ketinggian, 
+                        "SIAGA IV", 
+                        "24", 
+                        "5", 
+                        "2", 
+                        snapshot.data.today.max, 
+                        snapshot.data.today.min, 
+                        snapshot.data.today.banjir.toString(), 
+                        snapshot.data.today.awas.toString(),
+                        snapshot.data.today.waspada.toString(),
+                      );
+                    } else if(snapshot.data.data.status == "5"){
+                      return _buildMain(
+                        "Katulampa",
+                        "Sidangrasa, Bogor",
                         snapshot.data.data.tanggal.toString(), 
                         snapshot.data.data.jam, 
                         AppColors.amanColor, 
@@ -400,9 +418,9 @@ class _StatisticPageState extends State<StatisticPage> {
                       padding: EdgeInsets.all(12 * MediaQuery.of(context).size.aspectRatio),
                       child: Row(
                         children: <Widget>[
-                          Expanded(child: _buildToday(AppColors.meluapAlert, "MELUAP", meluap)),
-                          Expanded(child: _buildToday(AppColors.awasAlert, "AWAS", awas)),
-                          Expanded(child: _buildToday(AppColors.waspadaAlert, "WASPADA", waspada)),
+                          Expanded(child: _buildToday(AppColors.meluapAlert, "SIAGA I", meluap)),
+                          Expanded(child: _buildToday(AppColors.awasAlert, "SIAGA II", awas)),
+                          Expanded(child: _buildToday(AppColors.waspadaAlert, "SIAGA III", waspada)),
                         ],
                       ),
                     ),
@@ -485,7 +503,7 @@ class _StatisticPageState extends State<StatisticPage> {
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 5 * MediaQuery.of(context).size.aspectRatio),
                               child: Text(
-                                value + " m",
+                                value + " cm",
                                 style: TextStyle(
                                   color: color,
                                   fontWeight: FontWeight.bold,
@@ -570,10 +588,10 @@ class _StatisticPageState extends State<StatisticPage> {
                                   ),
                                 ),
                                 Text(
-                                  tinggi + " m",
+                                  tinggi + " cm",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 50 * MediaQuery.of(context).textScaleFactor,
+                                    fontSize: 45 * MediaQuery.of(context).textScaleFactor,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

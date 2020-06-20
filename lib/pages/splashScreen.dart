@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:inafews_app/core/style.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,6 +12,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  startSplashScreen() async{
+    var dur = const Duration(seconds: 5);
+
+    return Timer(dur, (){
+      Navigator.pushReplacementNamed(context, '/statistic');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startSplashScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,16 +36,32 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Indonesia Flood Early \nWarning System",
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Image.asset(
+                  "images/inafews_icon.png",
+                  height: 150,
+                  width: 150,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15 * MediaQuery.of(context).size.aspectRatio),
+                  child: Text(
+                    "Indonesia Flood Early \nWarning System",
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                )
+                ),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 100 * MediaQuery.of(context).size.aspectRatio,
+            left: 280 * MediaQuery.of(context).size.aspectRatio,
+            child: SpinKitWave(
+              color: Colors.white,
+              size: 80 * MediaQuery.of(context).size.aspectRatio,
             ),
           )
         ],
