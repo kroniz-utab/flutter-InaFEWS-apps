@@ -268,7 +268,7 @@ class _StatisticPageState extends State<StatisticPage> {
                         "Sidangrasa, Bogor",
                         snapshot.data.data.tanggal.toString(), 
                         snapshot.data.data.jam, 
-                        AppColors.amanColor, 
+                        AppColors.siaga4, 
                         snapshot.data.data.ketinggian, 
                         "SIAGA IV", 
                         "24", 
