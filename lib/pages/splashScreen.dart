@@ -53,17 +53,16 @@ class _SplashScreenState extends State<SplashScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  child: SpinKitWave(
+                    color: Colors.white,
+                    size: 40 * MediaQuery.of(context).size.aspectRatio,
+                  ),
+                ),
               ],
             ),
           ),
-          Positioned(
-            bottom: 100 * MediaQuery.of(context).size.aspectRatio,
-            left: 280 * MediaQuery.of(context).size.aspectRatio,
-            child: SpinKitWave(
-              color: Colors.white,
-              size: 80 * MediaQuery.of(context).size.aspectRatio,
-            ),
-          )
         ],
       ),
     );

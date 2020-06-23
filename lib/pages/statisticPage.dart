@@ -162,12 +162,12 @@ class _StatisticPageState extends State<StatisticPage> {
       body: Stack(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.aspectRatio  * 600,
+            height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               color: AppColors.mainColor,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(100*MediaQuery.of(context).size.aspectRatio),
-                bottomRight: Radius.circular(100*MediaQuery.of(context).size.aspectRatio),
+                bottomLeft: Radius.circular(MediaQuery.of(context).size.width * 0.25),
+                bottomRight: Radius.circular(MediaQuery.of(context).size.width * 0.25),
               )
             ),
           ),
@@ -323,7 +323,7 @@ class _StatisticPageState extends State<StatisticPage> {
     );
   }
 
-  Container _buildMain(
+  Widget _buildMain(
     String loc,
     String detail,
     String tanggal,
@@ -340,106 +340,108 @@ class _StatisticPageState extends State<StatisticPage> {
     String awas,
     String waspada
   ) {
-    return Container(
-          padding: EdgeInsets.only(top: 25 * MediaQuery.of(context).size.aspectRatio ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 100 * MediaQuery.of(context).size.aspectRatio ,
-                  left: 30 * MediaQuery.of(context).size.aspectRatio,
-                  right: 30 * MediaQuery.of(context).size.aspectRatio
-                ),
-                child: Text(
-                  loc,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32 * MediaQuery.of(context).textScaleFactor,
+    return SingleChildScrollView(
+      child: Container(
+            padding: EdgeInsets.only(top: 25 * MediaQuery.of(context).size.aspectRatio ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.04 ,
+                    left: MediaQuery.of(context).size.width * 0.04,
+                    right: MediaQuery.of(context).size.width * 0.04
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 10 * MediaQuery.of(context).size.aspectRatio,
-                  left: 30 * MediaQuery.of(context).size.aspectRatio ,
-                  right: 30 * MediaQuery.of(context).size.aspectRatio,
-                  bottom: 15 * MediaQuery.of(context).size.aspectRatio,
-                ),
-                child: Text(
-                  detail,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16 * MediaQuery.of(context).textScaleFactor,
-                  ),
-                ),
-              ),
-              // tanggal, jam, ketinggian, status, temp, wind, rain
-              _buildMainBanner(tanggal, jam, colorInd, tinggi, status, temp, wind, rain),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30 * MediaQuery.of(context).size.aspectRatio,
-                  vertical: 15 * MediaQuery.of(context).size.aspectRatio,
-                ),
-                child: Center(
                   child: Text(
-                    "Data Hari Ini",
+                    loc,
                     style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20 * MediaQuery.of(context).textScaleFactor,
-                      fontWeight: FontWeight.bold
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32 * MediaQuery.of(context).textScaleFactor,
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30 * MediaQuery.of(context).size.aspectRatio),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(child: _buildData(FlutterIcons.angle_double_up, AppColors.awasAlert, max,"KETINGGIAN MAX")),
-                    SizedBox(width: 20 * MediaQuery.of(context).size.aspectRatio,),
-                    Expanded(child: _buildData(FlutterIcons.angle_double_down, AppColors.amanColor, min,"KETINGGIAN MIN")),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30 * MediaQuery.of(context).size.aspectRatio,
-                  vertical: 20 * MediaQuery.of(context).size.aspectRatio,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.005,
+                    left: MediaQuery.of(context).size.width * 0.04,
+                    right: MediaQuery.of(context).size.width * 0.04,
+                    bottom: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  child: Text(
+                    detail,
+                    style: TextStyle(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20*MediaQuery.of(context).size.aspectRatio),
-                      ),
-                      border: Border.all(color: Colors.white),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(1,1),
-                          spreadRadius: 3*MediaQuery.of(context).size.aspectRatio,
-                          blurRadius: 3*MediaQuery.of(context).size.aspectRatio,
-                        ),
-                      ]
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16 * MediaQuery.of(context).textScaleFactor,
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(12 * MediaQuery.of(context).size.aspectRatio),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(child: _buildToday(AppColors.meluapAlert, "SIAGA I", meluap)),
-                          Expanded(child: _buildToday(AppColors.awasAlert, "SIAGA II", awas)),
-                          Expanded(child: _buildToday(AppColors.waspadaAlert, "SIAGA III", waspada)),
-                        ],
-                      ),
-                    ),
+                  ),
                 ),
-              )
-            ],
+                // tanggal, jam, ketinggian, status, temp, wind, rain
+                _buildMainBanner(tanggal, jam, colorInd, tinggi, status, temp, wind, rain),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.04,
+                    vertical: MediaQuery.of(context).size.width * 0.02,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Data Hari Ini",
+                      style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontSize: 20 * MediaQuery.of(context).textScaleFactor,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(child: _buildData(FlutterIcons.angle_double_up, AppColors.awasAlert, max,"KETINGGIAN MAX")),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.04,),
+                      Expanded(child: _buildData(FlutterIcons.angle_double_down, AppColors.amanColor, min,"KETINGGIAN MIN")),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.04,
+                    vertical: MediaQuery.of(context).size.width * 0.04,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20*MediaQuery.of(context).size.aspectRatio),
+                        ),
+                        border: Border.all(color: Colors.white),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(1,1),
+                            spreadRadius: 3*MediaQuery.of(context).size.aspectRatio,
+                            blurRadius: 3*MediaQuery.of(context).size.aspectRatio,
+                          ),
+                        ]
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(child: _buildToday(AppColors.meluapAlert, "SIAGA I", meluap)),
+                            Expanded(child: _buildToday(AppColors.awasAlert, "SIAGA II", awas)),
+                            Expanded(child: _buildToday(AppColors.waspadaAlert, "SIAGA III", waspada)),
+                          ],
+                        ),
+                      ),
+                  ),
+                )
+              ],
+            ),
           ),
-        );
+    );
   }
 
   Column _buildToday(Color color, String title, String value) {
@@ -493,8 +495,10 @@ class _StatisticPageState extends State<StatisticPage> {
                       child: Padding(
                         padding: EdgeInsets.all(5 * MediaQuery.of(context).size.aspectRatio),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Icon(
                                   icon,
@@ -554,7 +558,7 @@ class _StatisticPageState extends State<StatisticPage> {
                     ),
                   ]
                 ),
-                margin: EdgeInsets.symmetric(horizontal: 30 * MediaQuery.of(context).size.aspectRatio),
+                margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
                 padding: EdgeInsets.all(20 * MediaQuery.of(context).size.aspectRatio),
                 child: Center(
                   child: Column(
@@ -576,14 +580,14 @@ class _StatisticPageState extends State<StatisticPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15 * MediaQuery.of(context).size.aspectRatio),
+                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.width * 0.03),
                         child: Container(
-                          width: 320*MediaQuery.of(context).size.aspectRatio,
-                          height: 320*MediaQuery.of(context).size.aspectRatio,
+                          width: 200,
+                          height: 200,
                           decoration: BoxDecoration(
                             color: color,
                             borderRadius: BorderRadius.all(
-                              Radius.circular(160*MediaQuery.of(context).size.aspectRatio),
+                              Radius.circular(100),
                             )
                           ),
                           child: Center(
@@ -594,7 +598,7 @@ class _StatisticPageState extends State<StatisticPage> {
                                   "Ketinggian air",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15 * MediaQuery.of(context).textScaleFactor,
+                                    fontSize: 15 ,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -602,7 +606,7 @@ class _StatisticPageState extends State<StatisticPage> {
                                   tinggi + " cm",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 45 * MediaQuery.of(context).textScaleFactor,
+                                    fontSize: 45 ,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -610,7 +614,7 @@ class _StatisticPageState extends State<StatisticPage> {
                                   status,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 24 * MediaQuery.of(context).textScaleFactor,
+                                    fontSize: 24 ,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )
@@ -620,7 +624,7 @@ class _StatisticPageState extends State<StatisticPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(15 * MediaQuery.of(context).size.aspectRatio),
+                        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
