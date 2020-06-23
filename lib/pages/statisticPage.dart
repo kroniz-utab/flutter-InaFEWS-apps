@@ -11,6 +11,8 @@ import 'package:inafews_app/core/base_api.dart' as RestAPI;
 import 'dart:convert';
 import 'dart:async';
 
+enum ConfirmAction { CANCEL, ACCEPT, ERROR }
+
 FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 Future<Banjir> fetchBanjir() async{
@@ -185,8 +187,17 @@ class _StatisticPageState extends State<StatisticPage> {
               future: futureBanjir,
               builder: (BuildContext context, AsyncSnapshot snapshot){
                 if(snapshot.hasError){
-                  return Center(
-                    child: Text("Error : ${snapshot.error}"),
+                  return AlertDialog(
+                    title: Text('INTERNET TIDAK TERSAMBUNG'),
+                    content: const Text('Harap Nyalakan Penggunaan Data / WiFi'),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: const Text('Ok'),
+                        onPressed: (){
+                          Navigator.of(context).pop(ConfirmAction.CANCEL);
+                        },
+                      )
+                    ],
                   );
                 } else if (snapshot.hasData){
                   if(snapshot.data.siteStatus != "Active"){
